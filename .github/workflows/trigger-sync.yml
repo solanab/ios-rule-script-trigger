@@ -2,7 +2,7 @@ name: Trigger Sync Workflow
 
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 # 需要添加权限配置
