@@ -27,9 +27,10 @@ jobs:
           echo "Triggering workflow..."
           echo "Target repository: solanab/ios_rule_script_add_sing_box"
           echo "Event type: sync_upstream"
-          echo "Using token: ${#secrets.PAT_TOKEN} characters long"
+          TOKEN_LENGTH=$(echo -n "${{ secrets.PAT_TOKEN }}" | wc -c)
+          echo "Using token length: $TOKEN_LENGTH characters"
           
-          response=$(curl -v -X POST \
+          response=$(curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
             -w "\n%{http_code}" \
@@ -41,12 +42,6 @@ jobs:
           
           echo "Status code: $status_code"
           echo "Response: $response_body"
-          echo "Full curl output (without token):"
-          curl -v -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Bearer [REDACTED]" \
-            https://api.github.com/repos/solanab/ios_rule_script_add_sing_box/dispatches \
-            -d '{"event_type":"sync_upstream"}' 2>&1 | sed 's/Bearer.*/Bearer [REDACTED]/'
           
           if [[ $status_code != 2* ]]; then
             echo "Failed to trigger workflow"
