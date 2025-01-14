@@ -1,11 +1,8 @@
 name: Trigger Sync Workflow
 
 on:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: "*/1 * * * *"
+    - cron: "* * * * *"
   workflow_dispatch:
 
 # 需要添加权限配置
@@ -22,6 +19,8 @@ jobs:
           echo "Running at: $(date)"
           echo "Repository: ${{ github.repository }}"
           echo "Event name: ${{ github.event_name }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Trigger type: ${{ github.event.schedule }}"
           
       - name: Trigger Sync Workflow
         run: |
