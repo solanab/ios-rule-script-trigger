@@ -43,4 +43,3 @@ jobs:
             echo "Failed to trigger workflow"
             exit 1
           fi 
-            -d '{"event_type":"sync_upstream"}' 
