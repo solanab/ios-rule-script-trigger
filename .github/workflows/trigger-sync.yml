@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/1 * * * *"
   workflow_dispatch:
 
 # 需要添加权限配置
